@@ -6,7 +6,6 @@ html,
 body,
 :root {
   height: 100%;
-  @apply bg-neutral-900/80;
 }
 
 .hidden-scrollbar {
@@ -79,14 +78,5 @@ body,
     --border: 226.7 12.7% 17.5%;
     --input: 226.7 12.7% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
