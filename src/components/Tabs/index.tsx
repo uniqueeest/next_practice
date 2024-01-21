@@ -1,11 +1,21 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { useState, useContext, createContext, ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-const TabContext = createContext(null);
+type TabContextType = {
+  selectedIndex: string;
+  setSelectedIndex: (value: string) => void;
+};
 
-export const Tabs = ({ defaultValue, children }) => {
+const TabContext = createContext<TabContextType | null>(null);
+
+interface TabsProps {
+  defaultValue: string;
+  children: ReactNode;
+}
+
+export const Tabs = ({ defaultValue, children }: TabsProps) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultValue);
 
   const providerValue = { selectedIndex, setSelectedIndex };
@@ -17,17 +27,26 @@ export const Tabs = ({ defaultValue, children }) => {
   );
 };
 
-const List = ({ children }) => {
+interface ListProps {
+  children: ReactNode;
+}
+
+const List = ({ children }: ListProps) => {
   return (
     <div>
-      <div className="flex gap-[10px] p-1 w-fit rounded-[36px] bg-[#D0EAFE] text-[#0E97FF]">
+      <div className="flex gap-[10px] p-1 w-fit rounded-[36px] bg-[#F3E8FF] text-[#C084FC] font-medium shadow-wip-tab">
         {children}
       </div>
     </div>
   );
 };
 
-const Trigger = ({ value, text }) => {
+interface TriggerProps {
+  value: string;
+  text: string;
+}
+
+const Trigger = ({ value, text }: TriggerProps) => {
   const context = useContext(TabContext);
   const isActive = context.selectedIndex === value;
 
@@ -38,7 +57,7 @@ const Trigger = ({ value, text }) => {
   return (
     <button
       className={twMerge(
-        isActive ? 'rounded-[36px] bg-white' : '',
+        isActive ? 'rounded-[36px] bg-white text-[#9333EA] font-semibold' : '',
         'py-2 px-6'
       )}
       onClick={handleClickTab}
@@ -48,5 +67,23 @@ const Trigger = ({ value, text }) => {
   );
 };
 
+interface PanelProps {
+  value: string;
+  children: ReactNode;
+}
+
+const Panel = ({ value, children }: PanelProps) => {
+  const context = useContext(TabContext);
+
+  return (
+    <div
+      className={twMerge(context.selectedIndex === value ? 'block' : 'hidden')}
+    >
+      {children}
+    </div>
+  );
+};
+
 Tabs.List = List;
 Tabs.Trigger = Trigger;
+Tabs.Panel = Panel;
