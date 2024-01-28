@@ -4,7 +4,7 @@ interface InputBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   containerStyle?: React.CSSProperties;
 }
 
-const InputBox = ({ containerStyle, ...props }: InputBoxProps) => {
+export const InputBox = ({ containerStyle, ...props }: InputBoxProps) => {
   return (
     <div
       style={containerStyle}
@@ -15,5 +15,3 @@ const InputBox = ({ containerStyle, ...props }: InputBoxProps) => {
     </div>
   );
 };
-
-export default InputBox;

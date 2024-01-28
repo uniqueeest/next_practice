@@ -1,10 +1,10 @@
 'use client';
 
 // 테이블 헤더 타입 정의
-type TableHeader = string;
+export type TableHeader = string;
 
 // 테이블 행 데이터 타입 정의
-interface TableRowData {
+export interface TableRowData {
   category: string;
   details: string[];
 }
@@ -16,7 +16,7 @@ interface TableProps {
 }
 
 // 테이블 컴포넌트 정의
-const Table = ({ headers, data }: TableProps) => {
+export const Table = ({ headers, data }: TableProps) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full table-auto border-collapse border border-[#EDEDED] text-[14px] whitespace-nowrap">
@@ -54,5 +54,3 @@ const Table = ({ headers, data }: TableProps) => {
     </div>
   );
 };
-
-export default Table;

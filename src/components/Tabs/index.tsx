@@ -22,21 +22,22 @@ export const Tabs = ({ defaultValue, children }: TabsProps) => {
 
   return (
     <TabContext.Provider value={providerValue}>
-      <div>{children}</div>
+      <div className="flex flex-col items-center w-full">{children}</div>
     </TabContext.Provider>
   );
 };
 
-interface ListProps {
+interface ListProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-const List = ({ children }: ListProps) => {
+const List = ({ children, ...props }: ListProps) => {
   return (
-    <div>
-      <div className="flex gap-[10px] p-1 w-fit rounded-[36px] bg-[#F3E8FF] text-[#C084FC] font-medium shadow-wip-tab">
-        {children}
-      </div>
+    <div
+      className="flex gap-[10px] p-1 w-fit rounded-[36px] bg-[#F3E8FF] text-[#C084FC] font-medium shadow-wip-tab"
+      {...props}
+    >
+      {children}
     </div>
   );
 };
@@ -77,7 +78,10 @@ const Panel = ({ value, children }: PanelProps) => {
 
   return (
     <div
-      className={twMerge(context.selectedIndex === value ? 'block' : 'hidden')}
+      className={twMerge(
+        context.selectedIndex === value ? 'block' : 'hidden',
+        'w-full'
+      )}
     >
       {children}
     </div>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 
-import Table from '../Table';
+import { MPBoxDetail } from '../MPBoxDetail';
 
 const CONTAINER_GAP = 'flex gap-[10px]';
 const TEXT_STYLE = 'text-sm text-[#BDBDBD]';
@@ -16,7 +16,7 @@ const tableData = [
   { category: '비고', details: ['/', '/', '/', '/', '/'] },
 ];
 
-const MPBox = ({}) => {
+export const MPBox = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleClick = () => {
@@ -66,22 +66,8 @@ const MPBox = ({}) => {
         {isOpen ? '-' : '+'}
       </button>
       {isOpen && (
-        <article>
-          <div className="flex gap-[10px] mb-6">
-            <span>당선횟수</span>
-            <span>2회</span>
-          </div>
-          <div className="flex flex-col gap-3">
-            <span>공약 이행 현황</span>
-            <span className="text-[14px] text-[#AFAFAF]">
-              *총 공약수 = 완료+추진중+보류+폐기+기타공약수
-            </span>
-            <Table headers={tableHeaders} data={tableData} />
-          </div>
-        </article>
+        <MPBoxDetail tableHeaders={tableHeaders} tableData={tableData} />
       )}
     </section>
   );
 };
-
-export default MPBox;
