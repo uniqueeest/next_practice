@@ -94,3 +94,23 @@ body,
     --ring: 212.7 26.8% 83.9%;
   }
 }
+
+/* 스켈레톤 */
+@keyframes load {
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.skeleton_loading {
+  background: linear-gradient(
+    120deg,
+    #e5e5e5 30%,
+    #f0f0f0 38%,
+    #f0f0f0 40%,
+    #e5e5e5 48%
+  );
+  border-radius: 1rem;
+  background-size: 200% 100%;
+  animation: load 1s infinite linear;
+}
